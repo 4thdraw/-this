@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동적객체</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.js"
+        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+    <script src="./data/navi.js"></script>
+    <script>
+        $(document).ready(function () {
+            let gnbtags = "";
+            for (x in naviAlldata.gnb) {
+                gnbtags += `<li>
+                              <a href="${naviAlldata.gnb[x].href}">
+                                ${naviAlldata.gnb[x].nm}
+                              </a>
+                            </li>`;
+            }
+            $("#gnb").html(gnbtags)
+
+            let quicktags = "";
+            for (x in naviAlldata.quick) {
+                quicktags += `<li>
+                              <a href="${naviAlldata.quick[x].href}">
+                                ${naviAlldata.quick[x].nm}
+                              </a>
+                            </li>`;
+            }
+            $("#quick").html(quicktags)
+
+            let btntags = "";
+            for (x in naviAlldata.btn) {
+                btntags += `<button>
+                                ${naviAlldata.btn[x].nm}
+                            </button>`;
+            }
+            $("#btn").html(btntags)
+
+            $("#btn").on('click', 'button', function () {
+                $('body').css('background', naviAlldata.btn[$(this).index()].back)
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div id="btn">
+        1. 버튼태그 3개만 삽입
+        2. 버튼을 클릭하면 배경색상이 바뀝니다.
+        버튼 동적객체는 이벤트메서드를 바로 연결하지 못합니다.
+        on메서드를 적용해야한다.
+        $(부모).on(이벤트,동적객체,function(){})
+    </div>
+    <ul id="gnb"></ul>
+    <ul id="quick"></ul>
+
+</body>
+
+</html>
